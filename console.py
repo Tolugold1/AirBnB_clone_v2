@@ -113,18 +113,23 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def do_create(self, args):
-        """ Create an object of any class"""
-        if not args:
+    def do_create(self, arg):
+        """Create a new class"""
+        if not arg:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        new = arg.split(" ")  # in case arg has a space in between
+        if new[0] not in self.list_of_class:
             print("** class doesn't exist **")
-            return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
+        else:
+            new_clas = eval(new[0] + "()")
+            for argument in new[1:]:
+                new_argument = argument.split('=')
+                new_argument[1] = new_argument[1].strip('"')
+                new_argument[1] = new_argument[1].replace('_', ' ')
+                setattr(new_clas, new_argument[0], new_argument[1])
+            new_clas.save()
+            print(new_clas.id)
 
     def help_create(self):
         """ Help information for the create method """
