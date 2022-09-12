@@ -22,6 +22,6 @@ class State(BaseModel):
             """getter"""
             list_of_city = []
             for city in models.storage.all(City).values():
-                if city.State_id == self.id:
+                if city.state_id == self.id:
                     list_of_city.append(city)
             return list_of_city
