@@ -21,18 +21,17 @@ class DBStorage():
     __session = "None"
 
     def __init__(self):
-        """Initializing"""
-        HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
-        HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
-        HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
-        HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
+        """Instantiation of DBStorage class
+        """
+        MySQL_user = getenv('HBNB_MYSQL_USER')
+        MySQL_pwd = getenv('HBNB_MYSQL_PWD')
+        MySQL_host = getenv('HBNB_MYSQL_HOST')
+        MySQL_db = getenv('HBNB_MYSQL_DB')
         MySQL_env = getenv('HBNB_ENV')
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'
-                                      ''.format(
-            HBNB_MYSQL_USER, HBNB_MYSQL_PWD,
-        HBNB_MYSQL_HOST, HBNB_MYSQL_DB), pool_pre_ping=True)
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
+            MySQL_user, MySQL_pwd, MySQL_host, MySQL_db), pool_pre_ping=True)
         Base.metadata.create_all(self.__engine)
-        if MySQL_env == 'test':
+        if MySQL_env == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
@@ -63,7 +62,7 @@ class DBStorage():
         """
         delete from the current database session obj if not None
         """
-        if obj is not None:
+        if obj:
             self.__session.delete(obj)
 
     def reload(self):
