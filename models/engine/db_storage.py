@@ -43,11 +43,12 @@ class DBStorage():
             classes = [User, State, City, Amenity, Place, Review]
             data = []
             for cl in classes:
-                data.append(self.__session.query(cl).all())
+                data.append(self.__session.query(cl))
         dict = {}
         for object in data:
             key = '{}.{}'.format(type(object).__name__, object.id)
             dict[key] = object
+        return dict
 
     def new(self, obj):
         """Add obj to the current db"""
@@ -70,8 +71,8 @@ class DBStorage():
         Base.metadata.create_all(self.__engine)
         self.__session = sessionmaker(bind=self.__engine,
                                       expire_on_commit=False)
-        session = scoped_session(self.__session)
-        self.__session = session()
+        Session = scoped_session(self.__session)
+        self.__session = Session()
         
     def close(self):
         """close session"""
