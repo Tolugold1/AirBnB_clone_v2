@@ -39,7 +39,7 @@ class DBStorage():
             classes = [User, State, City, Amenity, Place, Review]
             data = []
             for cl in classes:
-                data.append(self.__session.query(cl))
+                data += self.__session.query(cl)
         dict = {}
         for object in data:
             key = '{}.{}'.format(type(object).__name__, object.id)
