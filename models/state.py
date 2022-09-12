@@ -8,7 +8,7 @@ import models
 from models.city import City
 
 
-class State(BaseModel):
+class State(BaseModel, Base):
     """state class"""
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
