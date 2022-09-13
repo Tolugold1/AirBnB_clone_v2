@@ -9,9 +9,7 @@ from models.amenity import Amenity
 from sqlalchemy import *
 import os
 
-metadata = Base.metadata
-
-place_amenity = Table('place_amenity', metadata,
+place_amenity = Table('place_amenity', Base.metadata,
                       Column(
                           'place_id', String(60),
                           ForeignKey('places.id'),
