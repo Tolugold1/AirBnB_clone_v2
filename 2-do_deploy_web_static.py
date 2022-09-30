@@ -14,15 +14,18 @@ env.hosts = ['3.239.86.158', '34.239.166.29']
 
 
 def do_pack():
-    """ Generate a .tgz archive from the contents of the web_static folder """
-    time = datetime.now()
-    name = 'web_static_' + str(time.year) + str(time.month) + str(time.day)
-    name = name + str(time.hour) + str(time.minute) + str(time.second) + '.tgz'
-    local('mkdir -p versions')
-    archive = local('tar -cvzf versions/{} web_static'.format(name))
+    """.tgz generator function"""
+    date_now = datetime.now()
+    file_name = 'web_static_{}{}{}{}{}{}.tgz'.format(
+        str(date_now.year), str(date_now.month), str(date_now.day),
+        str(date_now.hour), str(date_now.minute), 
+        str(date_now.second))
+    local("mkdir -p  versions")
+    archive = local('tar -cvzf versions/{} web_static'.format(
+        file_name))
     if archive.failed:
         return None
-    return 'versions/{}'.format(name)
+    return 'versions/{}'.format(file_name)
 
 
 def do_deploy(archive_path):
