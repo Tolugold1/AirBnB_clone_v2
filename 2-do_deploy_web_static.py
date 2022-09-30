@@ -6,7 +6,7 @@ from the contents of the web_static
 
 from fabric.api import *
 from datetime import datetime
-from os.path import exists
+from os.path import isfile
 
 
 env.user = 'ubuntu'
@@ -34,8 +34,7 @@ def do_deploy(archive_path):
     that distributes an archive to your web servers,
     using the function do_deploy
     """
-    file_path = exists(archive_path)
-    if not file_path:
+    if not isfile(archive_path):
         return file_path
     put('{}'.format(archive_path), '/tmp/')
     archive__ = archive_path.split('.')
