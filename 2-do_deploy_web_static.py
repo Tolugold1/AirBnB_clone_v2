@@ -37,9 +37,8 @@ def do_deploy(archive_path):
     if not isfile(archive_path):
         return file_path
     put('{}'.format(archive_path), '/tmp/')
-    archive__ = archive_path.split('.')
-    archive_ = archive__[0].split("/")
-    archive = archive_[1]
+    archive = archive_path.replace('.tgz', '')
+    archive = archive.replace('versions/', '')
     run("mkdir -p /data/web_static/releases/{}/".format(archive))
     run("tar -xzf /tmp/{}.tgz -c /data/web_static/releases/{}/".format(
         archive, archive))
