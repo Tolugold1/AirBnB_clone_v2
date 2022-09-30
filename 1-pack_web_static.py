@@ -7,6 +7,7 @@ from the contents of the web_static
 from fabric.api import local
 from datetime import datetime
 
+
 def do_pack():
     """.tgz generator function"""
     date_now = datetime.now()
