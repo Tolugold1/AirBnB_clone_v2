@@ -35,7 +35,7 @@ def do_deploy(archive_path):
     using the function do_deploy
     """
     if not isfile(archive_path):
-        return file_path
+        return False
     put('{}'.format(archive_path), '/tmp/')
     archive = archive_path.replace('.tgz', '')
     archive = archive.replace('versions/', '')
