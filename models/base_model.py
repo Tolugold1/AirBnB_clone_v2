@@ -46,11 +46,11 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values of th class"""
         new_dictionary = self.__dict__.copy()
+        if '_sa_instance_state' in new_dictionary.keys():
+            del new_dictionary['_sa_instance_state']
         new_dictionary.update({'__class__': str(type(self).__name__)})
         new_dictionary["created_at"] = self.created_at.isoformat()
         new_dictionary["updated_at"] = self.updated_at.isoformat()
-        if '_sa_instance_state' in new_dictionary.keys():
-            del new_dictionary['_sa_instance_state']
         return new_dictionary
 
     def delete(self):
