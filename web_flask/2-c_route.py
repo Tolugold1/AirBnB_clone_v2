@@ -9,6 +9,7 @@ def hello_route():
     """Funtion to print Hello HBNB"""
     return "Hello HBNB!"
 
+
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
     """print HBNB"""
@@ -19,7 +20,6 @@ def hbnb():
 def c(text):
     """print the value of text"""
     return "C {}".format(text).replace("_", " ")
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
