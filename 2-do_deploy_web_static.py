@@ -32,9 +32,10 @@ def do_deploy(archive_path):
     """ Distribute an archive to the web servers """
     if not isfile(archive_path):
         return False
-    put(archive_path, '/tmp/')
-    archive = archive_path.replace('.tgz', '')
-    archive = archive.replace('versions/', '')
+    put('{}'.format(archive_path), '/tmp/')
+    archive__ = archive_path.split('.')
+    archive_ = archive__[0].split("/")
+    archive = archive_[1]
     run('mkdir -p /data/web_static/releases/{}/'.format(archive))
     run('tar -xzf /tmp/{}.tgz -C /data/web_static/releases/{}/'
         .format(archive, archive))
