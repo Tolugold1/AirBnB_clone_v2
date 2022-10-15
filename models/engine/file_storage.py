@@ -21,9 +21,9 @@ class FileStorage:
     def save(self):
         """Saves storage dictionary to file"""
         temp = {}
+        for key, val in self.__objects.items():
+            temp[key] = val.to_dict()
         with open(self.__file_path, 'w') as f:
-            for key, val in self.__objects.items():
-                temp[key] = val.to_dict()
             json.dump(temp, f)
 
     def reload(self):
