@@ -14,8 +14,8 @@ from models.review import Review
 
 class DBStorage():
     """new engine"""
-    __engine = "None"
-    __session = "None"
+    __engine = None
+    __session = None
 
     def __init__(self):
         """Instantiation of DBStorage class
