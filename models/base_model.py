@@ -2,6 +2,7 @@
 """
 class BaseModel that defines all common attributes/methods for other classes
 """
+from enum import unique
 import uuid
 from datetime import datetime, date, time
 import models
@@ -13,10 +14,11 @@ Base = declarative_base()
 
 class BaseModel:
     """class BaseModel that defines all methods"""
-    id = Column(String(60), nullable=False, primary_key=True)
+    id = Column(String(60), unique=True, nullable=False, primary_key=True)
     created_at = Column(
-        DateTime, default=datetime.utcnow(), nullable=False)
-    updated_at = created_at
+        DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = Column(
+        DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
         """Initializing BaseModel"""
@@ -24,9 +26,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if key == '__class__':
-                    continue
-                setattr(self, key, value)
+                if key != '__class__':
+                    setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -45,8 +46,8 @@ class BaseModel:
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of th class"""
-        new_dictionary = self.__dict__.copy()
-        new_dictionary.update({'__class__': str(type(self).__name__)})
+        new_dictionary = dict(self.__dict__)
+        new_dictionary['__class__'] = str(type(self).__name__)
         new_dictionary["created_at"] = self.created_at.isoformat()
         new_dictionary["updated_at"] = self.updated_at.isoformat()
         if '_sa_instance_state' in new_dictionary.keys():
