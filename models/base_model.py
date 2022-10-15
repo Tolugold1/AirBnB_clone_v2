@@ -45,6 +45,8 @@ class BaseModel:
     def save(self):
         """updates updated_at with the current datetime"""
         self.updated_at = datetime.now()
+        if not self.created_at:
+            self.created_at = self.updated_at
         models.storage.new(self)
         models.storage.save()
 
