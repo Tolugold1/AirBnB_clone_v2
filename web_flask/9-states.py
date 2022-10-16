@@ -8,16 +8,10 @@ app = Flask(__name__, template_folder="templates")
 
 
 @app.route('/states', strict_slashes=False)
-def states_list(states=None):
-    """display list of states"""
-    return render_template('9-states.html', states=storage.all(State).values())
-
-
-
 @app.route('/states/<id>', strict_slashes=False)
 def states_list(id=None):
     """display list of states"""
-    return render_template('9-states.html', id=storage.all(State).values())
+    return render_template('9-states.html', states=storage.all(State).values(), id=id)
 
 
 @app.teardown_appcontext
