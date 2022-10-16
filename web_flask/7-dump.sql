@@ -21,7 +21,7 @@ USE hbnb_dev_db;
 -- Table structure for table 
 --
 
-DROP TABLE IF EXISTS ;
+DROP TABLE IF EXISTS `cities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE  (
