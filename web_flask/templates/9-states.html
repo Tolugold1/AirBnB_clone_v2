@@ -4,7 +4,7 @@
         <TITLE>HBNB</TITLE>
     </HEAD>
     <BODY>
-        {% if id == None %}
+        {% if id == '0' %}
         <H1>States</H1>
         <UL>
             {% for state in states|sort(attribute="name") %}
@@ -22,6 +22,7 @@
         </UL>
         {% else %}
         <H1> Not found! </H1>
+        {% endfor %}
         {% endif %}
     </BODY>
 </HTML>
