@@ -15,7 +15,7 @@ def states_list(states=None):
 
 
 @app.route('/states/<id>', strict_slashes=False)
-def states_list(id="Not found!"):
+def states_list(id=None):
     """display list of states"""
     return render_template('9-states.html', id=storage.all(State).values())
 
