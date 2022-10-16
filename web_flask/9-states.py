@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder="templates")
 
 @app.route('/states', strict_slashes=False)
 @app.route('/states/<id>', strict_slashes=False)
-def states_list(id=None):
+def states_list(id='0'):
     """display list of states"""
     return render_template('9-states.html', states=storage.all(State).values(), id=id)
 
