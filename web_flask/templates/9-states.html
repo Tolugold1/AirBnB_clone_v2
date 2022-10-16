@@ -12,7 +12,7 @@
             {% endfor %}
         </UL>
         {% else %}
-        {% for state in states if states.id == id %}
+        {% for state in states if state.id == id %}
         <H1>State: {{ state.name }}</H1>
         <H3>Cities: </H3>
         <UL>
