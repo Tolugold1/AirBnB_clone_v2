@@ -48,7 +48,7 @@ class Place(BaseModel, Base):
         """getter: returns the list of Amenity"""
         lists_of_Amenity = []
         for amnt in models.storage.all(Amenity).values():
-            if amnt.amenity_ids == self.id:
+            if amnt.place_id == self.id:
                 lists_of_Amenity.append(amnt)
         return lists_of_Amenity
 
