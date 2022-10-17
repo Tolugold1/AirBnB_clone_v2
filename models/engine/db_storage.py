@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """New database engine"""
 from sqlalchemy import create_engine
 from os import getenv
